@@ -29,8 +29,8 @@ jobs:
           # or: pip install selenium
 
       - name: Run crawler
-        env:
-          CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+        # env:
+        #   CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
         run: |
           python crawl.py
 
