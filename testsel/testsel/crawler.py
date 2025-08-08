@@ -15,17 +15,18 @@ opts.add_argument("--disable-dev-shm-usage")
 driver = webdriver.Chrome(options=opts)
 
 try:
-    url = "https://gurufocus.com/stock/GOOGL/summary"
+    ticker = "MSFT"
+    url = f"https://gurufocus.com/stock/{ticker}/summary"
     driver.get(url)
 
     # Wait until page loads — adjust selector if you want specific element
-    WebDriverWait(driver, 15).until(
+    WebDriverWait(driver, 60).until(
         EC.presence_of_element_located((By.TAG_NAME, "body"))
     )
 
     # Save HTML to a file
     Path("artifacts").mkdir(exist_ok=True)
-    html_path = Path("artifacts/page.html")
+    html_path = Path(f"artifacts/{ticker}.html")
     html_path.write_text(driver.page_source, encoding="utf-8")
 
     print(f"HTML saved to {html_path.resolve()}")
